@@ -1,0 +1,38 @@
+<h2>Cart View</h2>
+@if (cartItems$ | async; as carts) {
+  @if (!carts || carts.length == 0) {
+    <div class="card">NO CART DATA AVAILABLE</div>
+  } @else {
+    <table class="table">
+      <thead>
+        <tr>
+          <th>PRODUCT</th>
+          <th>QUANTITY</th>
+          <th>PRICE</th>
+          <th>TOTAL</th>
+          <th>REMOVE</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of carts; track c.productid) {
+            <tr>
+                <td>
+                  <img [src]="c.imageUrl" />
+                  <div>{{ c.name }}</div>
+                </td>
+                <td>
+                  <button (click)="decrement(c.productid)">-</button>
+                  {{ c.quantity }}
+                  <button (click)="increment(c.productid)">+</button>
+                </td>
+                <td>{{c.price}}</td>
+                <td>{{c.lineTotal}}</td>
+                <td><button class="btn btn-warning" (click)="removeItem(c.productid)">Remove</button></td>
+            </tr>
+        }
+      </tbody>
+    </table>
+    <div>cart Value:{{cartValue$|async}}</div>
+    <button (click)="clearCart()">claer Cart</button>
+  }
+}

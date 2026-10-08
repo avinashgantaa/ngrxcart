@@ -1,0 +1,25 @@
+<div>
+  <h2>Products page</h2>
+  @if (loading$ | async) {
+    <p>Products data loading, please wait...</p>
+  }
+  @if (error$ | async; as error) {
+    <p>{{ error.message }}</p>
+  }
+  @if (!(loading$ | async) && !(error$ | async)) {
+    @if (fetchProducts$ | async; as products) {
+    <div class="content p-4">
+          @for (product of products; track product.id) {
+        <div class="card">
+          <div>id: {{ product.id }}</div>
+          <div>name: {{ product.name }}</div>
+          <div>description: {{ product.description }}</div>
+          <div>price: {{ product.price }}</div>
+          <img [src]="product.imageUrl">
+          <button class="btn btn-primary mt-2" (click)="addItem(product.id)">Add to Cart</button>
+        </div>
+      }
+    </div>
+    }
+  }
+</div>

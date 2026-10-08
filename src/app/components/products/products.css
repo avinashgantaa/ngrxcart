@@ -1,0 +1,16 @@
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.content .card{
+    width: 20rem;
+    padding: 5px;
+}
+
+img{
+    height: 10rem;
+    width: 100%;
+    object-fit: cover;
+}
